@@ -74,7 +74,12 @@ def get_dataset(args):
 def get_device(args):
     args.device = 'cpu'
     if args.use_gpu:
-        args.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        if torch.cuda.is_available():
+            args.device = 'cuda'
+        elif torch.backends.mps.is_available():
+            args.device = 'mps'
+        else:
+            args.device = 'cpu'
     if args.device == 'cuda':
         try:
             args.device = args.device + ':' + str(args.device_id)

@@ -48,11 +48,17 @@ class shallowPLRNN(nn.Module):
     
     def encode(self, x):
         """'Encodes' the observations to the latent space."""
-        pinv = torch.pinverse(self.obs_matrix)
+        # Identity obs_model: obs_matrix is frozen identity, pinv is identity → skip
+        # (avoids CPU fallback for SVD on MPS, big speedup)
+        if self.dx == self.dz and not self.obs_matrix.requires_grad:
+            return x
+        pinv = torch.linalg.pinv(self.obs_matrix)
         return x @ pinv
 
     def decode(self, z):
         """'Decodes' latent states back to the observation space."""
+        if self.dx == self.dz and not self.obs_matrix.requires_grad:
+            return z
         return z @ self.obs_matrix
     
     def teacher_force(self, z_est, z_gt):
