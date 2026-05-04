@@ -1,2 +1,6 @@
 __pycache__
 trained_models
+data/bci/
+data/eeg/
+logs/
+.claude/

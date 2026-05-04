@@ -52,8 +52,11 @@ class shallowPLRNN(nn.Module):
         # (avoids CPU fallback for SVD on MPS, big speedup)
         if self.dx == self.dz and not self.obs_matrix.requires_grad:
             return x
-        pinv = torch.linalg.pinv(self.obs_matrix)
-        return x @ pinv
+        # Linear obs_model: use right-inverse A^+ = A^T(AA^T)^{-1} to avoid
+        # linalg.pinv (SVD-based, falls back to CPU on MPS). linalg.inv on the
+        # small (dz, dz) Gram matrix stays on MPS.
+        B = self.obs_matrix                         # (dz, dx)
+        return x @ B.T @ torch.linalg.inv(B @ B.T)
 
     def decode(self, z):
         """'Decodes' latent states back to the observation space."""
