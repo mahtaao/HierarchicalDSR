@@ -1,0 +1,214 @@
+<title>Submission 951 — Phase 2 Open Items</title>
+<style>
+  :root {
+    --bg: #f6f6f4; --surface: #ffffff; --surface-2: #fbfbfa;
+    --ink: #1c1d22; --ink-soft: #4a4c55; --ink-faint: #7c7e88;
+    --line: #e4e3df; --line-strong: #d3d2cc;
+    --accent: #b0521c; --accent-soft: #f8ede4;
+    --open: #c0392b; --open-bg: #fbeae7;
+    --partial: #b06a12; --partial-bg: #fbf0dd;
+    --done: #1f7a4d; --done-bg: #e4f3ea;
+    --lo: #5a6472; --lo-bg: #eceef1;
+    --reject: #c0392b; --weak: #b06a12; --accept: #1f7a4d;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16171b; --surface: #1e1f24; --surface-2: #212227;
+      --ink: #e9e9ec; --ink-soft: #b7b8c0; --ink-faint: #85868f;
+      --line: #2e2f36; --line-strong: #3a3b43;
+      --accent: #e3925a; --accent-soft: #33241a;
+      --open: #f0857a; --open-bg: #3a221f;
+      --partial: #e6b45f; --partial-bg: #362a17;
+      --done: #6cc793; --done-bg: #1c3628;
+      --lo: #9aa4b3; --lo-bg: #262a30;
+      --reject: #f0857a; --weak: #e6b45f; --accept: #6cc793;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f6f6f4; --surface: #ffffff; --surface-2: #fbfbfa;
+    --ink: #1c1d22; --ink-soft: #4a4c55; --ink-faint: #7c7e88;
+    --line: #e4e3df; --line-strong: #d3d2cc; --accent: #b0521c; --accent-soft: #f8ede4;
+    --open: #c0392b; --open-bg: #fbeae7; --partial: #b06a12; --partial-bg: #fbf0dd;
+    --done: #1f7a4d; --done-bg: #e4f3ea; --lo: #5a6472; --lo-bg: #eceef1;
+    --reject: #c0392b; --weak: #b06a12; --accept: #1f7a4d;
+  }
+  :root[data-theme="dark"] {
+    --bg: #16171b; --surface: #1e1f24; --surface-2: #212227;
+    --ink: #e9e9ec; --ink-soft: #b7b8c0; --ink-faint: #85868f;
+    --line: #2e2f36; --line-strong: #3a3b43; --accent: #e3925a; --accent-soft: #33241a;
+    --open: #f0857a; --open-bg: #3a221f; --partial: #e6b45f; --partial-bg: #362a17;
+    --done: #6cc793; --done-bg: #1c3628; --lo: #9aa4b3; --lo-bg: #262a30;
+    --reject: #f0857a; --weak: #e6b45f; --accept: #6cc793;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .wrap { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.5; padding: clamp(1.1rem,4vw,3rem) clamp(0.9rem,4vw,2rem) 4rem; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1040px; margin: 0 auto; }
+
+  header.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 1.1rem; margin-bottom: 1.4rem; }
+  .eyebrow { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.7rem,5vw,2.6rem); line-height: 1.08; margin: .35rem 0 .3rem; text-wrap: balance; letter-spacing: -.01em; }
+  .sub { color: var(--ink-soft); font-size: .95rem; max-width: 64ch; }
+
+  .scores { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1.15rem; }
+  .score { display: flex; align-items: center; gap: .5rem; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: .4rem .65rem .4rem .45rem; }
+  .score .num { font-family: var(--mono); font-weight: 700; font-size: 1rem; width: 1.7rem; height: 1.7rem; display: grid; place-items: center; border-radius: 7px; color: #fff; }
+  .score.reject .num { background: var(--reject); } .score.weak .num { background: var(--weak); } .score.accept .num { background: var(--accept); }
+  .score .who { line-height: 1.18; }
+  .score .who b { display: block; font-size: .84rem; font-family: var(--mono); }
+  .score .who span { font-size: .71rem; color: var(--ink-faint); }
+  .score .flag { font-size: .64rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: .1rem .35rem; border-radius: 5px; margin-left: .1rem; }
+  .flag.locked { color: var(--done); background: var(--done-bg); }
+  .flag.active { color: var(--open); background: var(--open-bg); }
+  .flag.owed { color: var(--partial); background: var(--partial-bg); }
+
+  .callout { background: var(--accent-soft); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 12px; padding: .9rem 1.15rem; margin: 1.3rem 0 .4rem; font-size: .9rem; color: var(--ink-soft); }
+  .callout b { color: var(--ink); }
+
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 1.3rem; margin: 2rem 0 .3rem; letter-spacing: -.01em; }
+  h2 .h-note { font-family: var(--sans); font-size: .78rem; font-weight: 500; color: var(--ink-faint); }
+  .lede { color: var(--ink-soft); font-size: .88rem; margin: 0 0 1rem; }
+
+  .group-label { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--ink-faint); margin: 1.5rem 0 .55rem; display: flex; align-items: center; gap: .5rem; }
+  .group-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  .item { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: .9rem 1.1rem; margin-bottom: .7rem; border-left: 3px solid var(--line-strong); }
+  .item.crit { border-left-color: var(--open); }
+  .item.med { border-left-color: var(--partial); }
+  .item.quick { border-left-color: var(--lo); }
+  .item-head { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; margin-bottom: .35rem; }
+  .item-n { font-family: var(--mono); font-weight: 700; color: var(--ink-faint); font-size: .82rem; }
+  .item-title { font-weight: 700; color: var(--ink); font-size: .98rem; }
+  .owner { font-family: var(--mono); font-size: .7rem; color: var(--ink-faint); background: var(--surface-2); border: 1px solid var(--line); padding: .1rem .4rem; border-radius: 5px; }
+  .st { font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; padding: .16rem .5rem; border-radius: 999px; white-space: nowrap; }
+  .st.open { color: var(--open); background: var(--open-bg); }
+  .st.partial { color: var(--partial); background: var(--partial-bg); }
+  .st.push { margin-left: auto; }
+  .item p { margin: .35rem 0 0; font-size: .87rem; color: var(--ink-soft); line-height: 1.5; }
+  .item p b { color: var(--ink); }
+  .item .owed { margin-top: .5rem; padding-top: .5rem; border-top: 1px dashed var(--line); font-size: .85rem; }
+  .item .owed b { color: var(--accent); }
+  .tag { font-family: var(--mono); font-size: .68rem; color: var(--ink-faint); }
+
+  details.done-block { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; margin-top: .6rem; overflow: hidden; }
+  details.done-block > summary { list-style: none; cursor: pointer; padding: .85rem 1.1rem; display: flex; align-items: center; gap: .6rem; font-weight: 600; color: var(--ink); font-size: .92rem; }
+  details.done-block > summary::-webkit-details-marker { display: none; }
+  .chev { margin-left: auto; color: var(--ink-faint); font-size: .78rem; transition: transform .2s; }
+  details[open] .chev { transform: rotate(90deg); }
+  .done-body { padding: 0 1.15rem 1.1rem; border-top: 1px solid var(--line); }
+  .done-row { display: flex; gap: .6rem; align-items: baseline; padding: .5rem 0; border-bottom: 1px solid var(--line); font-size: .85rem; color: var(--ink-soft); }
+  .done-row:last-child { border-bottom: none; }
+  .done-row .tick { color: var(--done); font-weight: 700; }
+  .done-row .who2 { font-family: var(--mono); font-size: .7rem; color: var(--ink-faint); white-space: nowrap; }
+  code { font-family: var(--mono); font-size: .85em; background: var(--surface-2); padding: .05rem .3rem; border-radius: 4px; }
+  footer { margin-top: 2.4rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .77rem; color: var(--ink-faint); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap"><div class="page">
+
+  <header class="masthead">
+    <div class="eyebrow">NeurIPS Position Track · Phase 2 Discussion</div>
+    <h1>Submission 951 — Phase 2 Open Items</h1>
+    <p class="sub">What is still unaddressed after the Phase-1 rebuttals, read directly from the OpenReview thread (<code>comments_v1_5.pdf</code>). Nine open threads; everything answered so far is listed at the bottom.</p>
+    <div class="scores">
+      <div class="score reject"><span class="num">3</span><span class="who"><b>11Xm</b><span>Reject · conf 5</span></span><span class="flag active">active</span></div>
+      <div class="score reject"><span class="num">4</span><span class="who"><b>xW1o</b><span>Borderline rej · conf 4</span></span><span class="flag active">active</span></div>
+      <div class="score weak"><span class="num">6</span><span class="who"><b>mRZt</b><span>Weak accept · conf 3</span></span><span class="flag locked">satisfied</span></div>
+      <div class="score accept"><span class="num">7</span><span class="who"><b>T2SC</b><span>Accept · conf 3</span></span><span class="flag owed">items owed</span></div>
+    </div>
+  </header>
+
+  <div class="callout">
+    <b>Where the rating actually moves.</b> mRZt replied 01 Aug — maintains <b>6</b>, satisfied on the promise that the new experiments and the corrected Fig 2 caption make the final version; that score is effectively locked. T2SC already accepts (<b>7</b>); its open items are polish and camera-ready commitments, not rating-critical. The two movers are <b>xW1o (4)</b>, still unconvinced on a faithful TCL replication, and <b>11Xm (3, conf 5)</b>, unengaged on significance and the "straw-man alternatives" charge. Put Phase-2 effort on items 1 and 3.
+  </div>
+
+  <div class="callout" style="border-left-color:var(--open);background:var(--open-bg)">
+    <b>Clock.</b> Today is 2 Aug. The author-visible discussion window (Phase 2) closes <b>3 Aug</b>; after that it is reviewer/AC-only (Phase 3) and authors can no longer post. Anything meant for the reviewers to read must go up now.
+  </div>
+
+  <h2>Open threads <span class="h-note">9 unaddressed</span></h2>
+
+  <div class="group-label">Critical · rating-moving</div>
+
+  <div class="item crit">
+    <div class="item-head"><span class="item-n">1</span><span class="item-title">Faithful TCL with alpha-band (Morlet) spectral features</span><span class="owner">xW1o</span><span class="st open push">Open</span></div>
+    <p>xW1o's core objection is that the TCL implementation may not faithfully represent the method. In the 02 Aug comment we <b>closed three of four sub-points</b>: swept segments to 512, added normalization + dropout, and applied the final linear ICA (score invariant to it, within 0.015). The <b>fourth is still not run</b>: the Morlet alpha-band spectral preprocessing from Hyvärinen &amp; Morioka (2016). We argued it is irrelevant (1/f dominates the alpha band too), but xW1o <b>insisted twice</b> that a method critique must replicate the method as published, and has not replied to the 02 Aug comment. Rating held at 4.</p>
+    <div class="owed"><b>Owed:</b> either run TCL on alpha-band Morlet features and report it (closes the faithfulness objection cleanly), or post a final, crisp version of the "band-limiting does not remove the 1/f confounder" argument plus an explicit offer to run it. Given it is the single rating-critical thread and the libraries are mature, running it is the safer close. <span class="tag">= todo #1 · chat item#1</span></div>
+  </div>
+
+  <div class="item crit">
+    <div class="item-head"><span class="item-n">2</span><span class="item-title">Prevalence of the practice — explicit denominator + intro table</span><span class="owner">Meta · xW1o · T2SC</span><span class="st partial push">Partial</span></div>
+    <p>Asked by the meta-review (point 2), xW1o (scoping), and T2SC (missing references). We <b>posted concrete examples</b> (Delorme et al. 2012, "Independent EEG Sources Are Dipolar"; Khemakhem et al. 2020, iVAE validates identifiability on synthetic ground truth) and the honest framing that explicit biological-source-identifiability claims are <b>uncommon</b>; the practice is interpreting components as sources without method-independent validation. <b>Not delivered:</b> the systematic search with an explicit denominator and the promised introduction table (mathematical identifiability / real-data biological claim / input space sensor-or-source / validation used), which we said we would post "shortly / in phase II."</p>
+    <div class="owed"><b>Owed:</b> finish the systematic review and post the denominator + table. This is meta-review point 2 and it feeds the AC's view directly. <span class="tag">= todo #6 · chat systematic-review-action-6</span></div>
+  </div>
+
+  <div class="item crit">
+    <div class="item-head"><span class="item-n">3</span><span class="item-title">11Xm — the promised remaining formal comments</span><span class="owner">11Xm</span><span class="st open push">Open</span></div>
+    <p>The posted rebuttal answered Q1/Q2 (novelty framed as points i–iv) and Q3 (three-generator robustness), and explicitly said "we will answer the remaining questions as formal comments ASAP" while acknowledging the reviewer is unsatisfied on technical points, presentation, and alternative views. <b>Still unaddressed:</b> the "alternative positions are trivial straw-man arguments" charge, the significance / "this is a well-known limitation" stance (Significance 2), and presentation. Rating 3 at confidence 5 — the hardest reviewer.</p>
+    <div class="owed"><b>Owed:</b> the promised formal comment — steelman then rebut the alternative positions, and argue significance beyond the generic "latents can't be verified" observation (the falsifiability standard + the scoreable benchmark + the generator-specific-artifact result are the non-obvious contributions). <span class="tag">= todo #8</span></div>
+  </div>
+
+  <div class="group-label">Medium · owed but not rating-critical</div>
+
+  <div class="item med">
+    <div class="item-head"><span class="item-n">4</span><span class="item-title">Consolidated response to the meta-review (AC)</span><span class="owner">Meta / AC</span><span class="st open push">Open</span></div>
+    <p>All engagement so far is per-reviewer; there is <b>no dedicated reply to the AC</b>. Meta-review point 1 — separate mathematical identifiability from whether the assumptions hold on real EEG from whether recovered components are biological sources — is only handled implicitly inside the 11Xm rebuttal.</p>
+    <div class="owed"><b>Owed:</b> a short AC-facing synthesis that foregrounds the three-way claim separation and points to where each of the five meta points is answered. <span class="tag">= todo #8</span></div>
+  </div>
+
+  <div class="item med">
+    <div class="item-head"><span class="item-n">5</span><span class="item-title">Presentation — restructure §6, redo Figure 3, add numbers</span><span class="owner">T2SC</span><span class="st open push">Open</span></div>
+    <p>T2SC's presentation score is 1 (poor): structure, writing, and Figure 3 / Section 6 are messy, with claims too broad and no numerical backing. <b>Not addressed</b> in any rebuttal (the C1–C5 replies were all about TCL, generators, framing, the caption, and FastICA).</p>
+    <div class="owed"><b>Owed:</b> acknowledge it and commit, in a short comment, to restructuring §6, redrawing Figure 3, and attaching numbers to the qualitative claims in the camera-ready. <span class="tag">= todo #13</span></div>
+  </div>
+
+  <div class="item med">
+    <div class="item-head"><span class="item-n">6</span><span class="item-title">Source-coupling: dependent dynamics vs. extra linear mixing</span><span class="owner">Meta (W5)</span><span class="st open push">Open</span></div>
+    <p>Meta weakness 5 has two halves. The "generator not biophysically validated" half is answered by the biophysical-leadfield generator. The other half — that the source-coupling axis <b>may amount to an additional linear mixing rather than genuine dependent source dynamics</b> — was <b>never explicitly answered</b> in any posted rebuttal.</p>
+    <div class="owed"><b>Owed:</b> first verify what the coupling code actually does; then clarify (framed as intended) that it induces dependent dynamics, not a second linear remix — or fix it if it is linear. <span class="tag">= todo #9</span></div>
+  </div>
+
+  <div class="item med">
+    <div class="item-head"><span class="item-n">7</span><span class="item-title">Define "latent source" for scalp EEG</span><span class="owner">T2SC</span><span class="st open push">Open</span></div>
+    <p>T2SC asks what a recoverable latent source is meant to be — individual neurons, populations, or more abstract components. <b>Not addressed.</b> Grounding the term also sharpens the position.</p>
+    <div class="owed"><b>Owed:</b> a one-line operational definition used consistently (e.g. population-level dynamical sources), stated in a comment and slated for the text. <span class="tag">= todo #12</span></div>
+  </div>
+
+  <div class="group-label">Quick · one-liners</div>
+
+  <div class="item quick">
+    <div class="item-head"><span class="item-n">8</span><span class="item-title">How is the chance level in Figure 2 computed?</span><span class="owner">T2SC (Q1)</span><span class="st open push">Open</span></div>
+    <p>T2SC question 1, asked plainly, <b>not answered anywhere</b> in the thread.</p>
+    <div class="owed"><b>Owed:</b> one sentence stating how the dashed chance reference was computed (and slate it for the caption/methods). <span class="tag">= todo #14</span></div>
+  </div>
+
+  <div class="item quick">
+    <div class="item-head"><span class="item-n">9</span><span class="item-title">Title should state the position explicitly</span><span class="owner">T2SC</span><span class="st open push">Open</span></div>
+    <p>Raised by T2SC; <b>not addressed.</b> A camera-ready change, but cheap and it signals responsiveness.</p>
+    <div class="owed"><b>Owed:</b> a proposed revised title that names the position, mentioned in a comment. <span class="tag">= todo #15</span></div>
+  </div>
+
+  <h2>Already answered in Phase 1 <span class="h-note">context — do not re-litigate</span></h2>
+  <details class="done-block">
+    <summary>Delivered rebuttal points<span class="chev">▶</span></summary>
+    <div class="done-body">
+      <div class="done-row"><span class="tick">✓</span><span><b>mRZt — every point</b> (latent-dim 4 vs 22, M≫D via leadfield, Fig 2 caption, standard cleaning / 1/f). Reviewer replied 01 Aug: <b>maintains 6</b>, satisfied conditional on camera-ready.</span><span class="who2">mRZt · locked</span></div>
+      <div class="done-row"><span class="tick">✓</span><span><b>TCL positive control</b> — faithful reimplementation, segment sweep to 512, normalization + dropout, final linear ICA (02 Aug). Clean/tanh recovery 0.95–0.98; EEG-realistic failures persist. <em>Band-filter still owed → open #1.</em></span><span class="who2">xW1o C1</span></div>
+      <div class="done-row"><span class="tick">✓</span><span><b>Generator robustness</b> — three generators (learned, random, biophysical leadfield). iVAE's apparent success is the generator-specific artifact (0.71 learned → ~0.10 others); linear methods invariant.</span><span class="who2">11Xm Q3 · T2SC Q3</span></div>
+      <div class="done-row"><span class="tick">✓</span><span><b>M≫D regime</b> — biophysical leadfield with free source count K at fixed D=22. FastICA 0.91 (K=8) → 0.065 (K=128); recovery vanishes once sources outnumber electrodes.</span><span class="who2">mRZt W2/Q2</span></div>
+      <div class="done-row"><span class="tick">✓</span><span><b>Fig 2 caption</b> — corrected to per-method / per-axis numbers (FastICA min 0.62, never chance; iVAE, PCA, TCL breakdowns given).</span><span class="who2">mRZt W3 · T2SC</span></div>
+      <div class="done-row"><span class="tick">✓</span><span><b>Generator-realism framing</b> — "resemble cortex" reconciled with "formal surrogate / no biophysical fidelity"; realism is of signal statistics, not source identity.</span><span class="who2">T2SC W6</span></div>
+      <div class="done-row"><span class="tick">✓</span><span><b>Standard EEG cleaning</b> — the 1/f aperiodic background is broadband and survives RANSAC / notch / ICA artifact removal; segment sweep isolates the mechanism.</span><span class="who2">mRZt W4/Q3</span></div>
+      <div class="done-row"><span class="tick">✓</span><span><b>Why not FastICA</b> — a high synthetic score is unfalsifiable on real EEG (no ground truth); FastICA makes no biological-identifiability claim; choosing it is an instance of the position, not a refutation.</span><span class="who2">T2SC Q2</span></div>
+      <div class="done-row"><span class="tick">✓</span><span><b>Novelty beyond the known limitation</b> — reframed as points (i)–(iv): falsifiability standard, scoreable benchmark, axis-to-assumption mapping, generator-specific-artifact result. <em>11Xm still unconvinced → open #3.</em></span><span class="who2">11Xm Q1/Q2</span></div>
+    </div>
+  </details>
+
+  <footer>Read from OpenReview submission 951 discussion thread (<code>writing/Rebuttal/comments_v1_5.pdf</code>, 2 Aug 2026). Companion to the Phase-1 action-item tracker (<code>review_todo.html</code>).</footer>
+
+</div></div>

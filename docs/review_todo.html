@@ -1,17 +1,10 @@
 <title>Submission 951 — Rebuttal To-Do</title>
 <style>
   :root {
-    --bg: #f6f6f4;
-    --surface: #ffffff;
-    --surface-2: #fbfbfa;
-    --ink: #1c1d22;
-    --ink-soft: #4a4c55;
-    --ink-faint: #7c7e88;
-    --line: #e4e3df;
-    --line-strong: #d3d2cc;
-    --accent: #4a5bd4;
-    --accent-soft: #eceeffc9;
-    /* semantic */
+    --bg: #f6f6f4; --surface: #ffffff; --surface-2: #fbfbfa;
+    --ink: #1c1d22; --ink-soft: #4a4c55; --ink-faint: #7c7e88;
+    --line: #e4e3df; --line-strong: #d3d2cc;
+    --accent: #4a5bd4; --accent-soft: #eceeffc9;
     --hi: #c0392b; --hi-bg: #fbeae7;
     --med: #b06a12; --med-bg: #fbf0dd;
     --lo: #5a6472; --lo-bg: #eceef1;
@@ -86,6 +79,13 @@
   .tablecard { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
   .scroll { overflow-x: auto; }
   table { border-collapse: collapse; width: 100%; font-size: .875rem; min-width: 720px; }
+  .actions table { min-width: 1240px; }
+  td.remind { font-size: .8rem; color: var(--ink); background: var(--med-bg); border-left: 2px solid var(--med); min-width: 260px; line-height: 1.5; }
+  td.remind b { color: var(--ink); }
+  td.remind.empty { color: var(--ink-faint); font-style: italic; background: transparent; border-left: 2px dashed var(--line-strong); min-width: 0; }
+  td.chat { font-size: .8rem; }
+  td.chat code { font-size: .72rem; word-break: break-all; }
+  td.chat.empty { color: var(--ink-faint); font-style: italic; }
   thead th { background: var(--surface-2); text-align: left; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; padding: .7rem .8rem; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
   tbody td { padding: .8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
   tbody tr:last-child td { border-bottom: none; }
@@ -105,36 +105,19 @@
   .planned.empty { color: var(--ink-faint); font-style: italic; }
   .shared { font-family: var(--mono); font-size: .68rem; color: var(--accent); background: var(--accent-soft); padding: .05rem .35rem; border-radius: 5px; }
 
-  /* TCL results */
-  .resultgrid table { min-width: 560px; }
-  td.axis { font-weight: 600; color: var(--ink); }
-  .delta { font-family: var(--mono); font-size: .82rem; white-space: nowrap; }
-  .delta .up { color: var(--accept); font-weight: 700; }
-  .delta .down { color: var(--reject); font-weight: 700; }
-  .reading { color: var(--ink-soft); font-size: .82rem; }
-  .takeaway { background: var(--accent-soft); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 10px; padding: .9rem 1.1rem; margin-top: 1rem; font-size: .9rem; color: var(--ink-soft); }
-  .takeaway b { color: var(--ink); }
+  .notebox { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 12px; padding: 1.1rem 1.3rem; font-size: .9rem; color: var(--ink-soft); line-height: 1.55; }
+  .notebox h3 { font-family: var(--serif); color: var(--ink); font-size: 1.06rem; margin: 1.3rem 0 .4rem; }
+  .notebox p { margin: .6rem 0; }
+  .notebox b { color: var(--ink); }
+  .notebox ul, .notebox ol { margin: .5rem 0; padding-left: 1.3rem; }
+  .notebox li { margin: .3rem 0; }
+  .notebox blockquote { margin: .9rem 0; padding: .3rem 0 .3rem 1rem; border-left: 3px solid var(--line-strong); color: var(--ink); }
+  .notebox table { min-width: 440px; margin: .8rem 0; }
+  .notebox code { font-family: var(--mono); font-size: .82em; background: var(--surface-2); padding: .05rem .3rem; border-radius: 4px; }
+  .notebox .scroll { overflow-x: auto; }
+  .notebox pre { background: var(--surface-2); padding: .7rem .9rem; border-radius: 8px; overflow-x: auto; font-family: var(--mono); font-size: .78rem; line-height: 1.45; color: var(--ink); }
+  .review .notebox { border: none; background: transparent; border-radius: 0; border-top: 1px solid var(--line); padding: .5rem 1.2rem 1.2rem; }
 
-  /* reviews */
-  details.review { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; margin-bottom: .7rem; overflow: hidden; }
-  details.review > summary { list-style: none; cursor: pointer; padding: .9rem 1.1rem; display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; }
-  details.review > summary::-webkit-details-marker { display: none; }
-  .rev-badge { font-family: var(--mono); font-weight: 700; font-size: .78rem; padding: .25rem .5rem; border-radius: 7px; color: #fff; }
-  .rev-badge.reject { background: var(--reject); } .rev-badge.weak { background: var(--weak); } .rev-badge.accept { background: var(--accept); } .rev-badge.meta { background: var(--ink-soft); }
-  .rev-id { font-family: var(--mono); font-weight: 700; font-size: .92rem; }
-  .rev-verdict { font-size: .84rem; color: var(--ink-soft); }
-  .rev-chev { margin-left: auto; color: var(--ink-faint); font-size: .8rem; transition: transform .2s; }
-  details[open] .rev-chev { transform: rotate(90deg); }
-  .rev-body { padding: 0 1.2rem 1.2rem; border-top: 1px solid var(--line); font-size: .88rem; color: var(--ink-soft); }
-  .rev-body h4 { color: var(--ink); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; margin: 1.1rem 0 .4rem; }
-  .rev-body p { margin: .4rem 0; }
-  .rev-body ul { margin: .4rem 0; padding-left: 1.2rem; }
-  .rev-body li { margin: .3rem 0; }
-  .meta-scores { display: flex; flex-wrap: wrap; gap: .3rem; margin: .3rem 0 0; font-size: .72rem; }
-  .metric { font-family: var(--mono); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: .12rem .4rem; color: var(--ink-soft); }
-  code { font-family: var(--mono); font-size: .85em; background: var(--surface-2); padding: .05rem .3rem; border-radius: 4px; }
-
-  /* rebuttal rules */
   .rules { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 14px; padding: 1.2rem 1.35rem 1.35rem; margin-bottom: 1.4rem; }
   .rules h2 { margin: 0 0 .2rem; font-size: 1.2rem; }
   .rules .lede { margin-bottom: .9rem; }
@@ -152,6 +135,25 @@
   .phase .p-what { font-size: .82rem; color: var(--ink-soft); margin-top: .2rem; }
   .phase .p-what b { color: var(--ink); }
   .phase.now .p-when::after { content: " · now"; color: var(--done); font-weight: 700; }
+
+  details.review { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; margin-bottom: .7rem; overflow: hidden; }
+  details.review > summary { list-style: none; cursor: pointer; padding: .9rem 1.1rem; display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; }
+  details.review > summary::-webkit-details-marker { display: none; }
+  .rev-badge { font-family: var(--mono); font-weight: 700; font-size: .78rem; padding: .25rem .5rem; border-radius: 7px; color: #fff; }
+  .rev-badge.reject { background: var(--reject); } .rev-badge.weak { background: var(--weak); } .rev-badge.accept { background: var(--accept); } .rev-badge.meta { background: var(--ink-soft); }
+  .rev-badge.sweep { background: var(--accent); } .rev-badge.gen { background: var(--med); } .rev-badge.clarify { background: var(--lo); } .rev-badge.dim { background: var(--hi); } .rev-badge.drafts { background: var(--done); }
+  .rev-id { font-family: var(--mono); font-weight: 700; font-size: .92rem; }
+  .rev-verdict { font-size: .84rem; color: var(--ink-soft); }
+  .rev-chev { margin-left: auto; color: var(--ink-faint); font-size: .8rem; transition: transform .2s; }
+  details[open] .rev-chev { transform: rotate(90deg); }
+  .rev-body { padding: 0 1.2rem 1.2rem; border-top: 1px solid var(--line); font-size: .88rem; color: var(--ink-soft); }
+  .rev-body h4 { color: var(--ink); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; margin: 1.1rem 0 .4rem; }
+  .rev-body p { margin: .4rem 0; }
+  .rev-body ul { margin: .4rem 0; padding-left: 1.2rem; }
+  .rev-body li { margin: .3rem 0; }
+  .meta-scores { display: flex; flex-wrap: wrap; gap: .3rem; margin: .3rem 0 0; font-size: .72rem; }
+  .metric { font-family: var(--mono); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: .12rem .4rem; color: var(--ink-soft); }
+  code { font-family: var(--mono); font-size: .85em; background: var(--surface-2); padding: .05rem .3rem; border-radius: 4px; }
   footer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .78rem; color: var(--ink-faint); }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   @media (max-width: 560px) { .rev-verdict { width: 100%; } }
@@ -181,9 +183,9 @@
     <span><span class="dot" style="background:var(--pend)"></span>Pending</span>
   </div>
 
-  <div class="tablecard"><div class="scroll"><table>
+  <div class="tablecard actions"><div class="scroll"><table>
     <thead><tr>
-      <th>#</th><th>Pri</th><th>Review point</th><th>Raised by</th><th>My suggested action</th><th>Planned action (Mahta)</th>
+      <th>#</th><th>Pri</th><th>Review point</th><th>Raised by</th><th>My suggested action</th><th>Planned action (Mahta)</th><th>Chat sessions</th><th>Points to remind</th>
     </tr></thead>
     <tbody>
       <tr>
@@ -192,6 +194,8 @@
         <td class="raised">Meta · T2SC · xW1o · mRZt</td>
         <td class="myaction">Reimplement TCL faithfully (band/Morlet features, sweep segments 8→512, dropout/norm, post-hoc ICA). Add a <b>positive control</b> where TCL provably recovers sources. Re-run synthetic + real EEG.</td>
         <td class="planned"><span class="status done"><span class="dot"></span>Decided</span><br><b>Fix done — reviewers were right</b> (see <em>TCL Fixed</em> chat; numbers below). Corrected scoring: TCL recovers well on clean/mild data (~0.90–0.94), breaks <b>only</b> on EEG-realistic axes. Reframe as the stronger thesis: looks fine until stressed like real scalp EEG, where there's no ground truth to notice. Update text + Fig 2; present clean-data recovery as the built-in positive control, <b>without foregrounding the earlier error</b>.</td>
+        <td class="chat"><b>item#1 of @review_todo.html via</b></td>
+        <td class="remind"><b>Sweep done, learned-W</b> (paper's shPLRNN mixing) — conclusions robust to mixing matrix. Positive control: clean linear MCC <b>0.98</b> (64/128 seg), 0.94 (8 seg); tanh 0.93; coupling 0.83–0.91. Corrected metric (mean abs canonical corr) is invariant to any linear map, so the final linear-ICA step doesn't change the score. <b>Text table only — no figure upload.</b> Camera-ready: add segment-sweep table + MCC-vs-segments figure to appendix; note in §5 that raising segments lifts clean recovery while deepening the 1/f failure.</td>
       </tr>
       <tr>
         <td class="num">2</td><td><span class="pri high">High</span></td>
@@ -199,6 +203,8 @@
         <td class="raised">Meta · 11Xm · T2SC · mRZt</td>
         <td class="myaction">Repeat key results with ≥1 alternative generator (different architecture, or a classical forward-model/dipole simulator); report whether conclusions hold. State if the generator was retrained per source-count setting.</td>
         <td class="planned"><span class="status done"><span class="dot"></span>Decided</span><br>Fast <b>systematic review</b> of EEG-generation methods in main ML venues (last 3 yrs) to find alternative generators; anchor on the Patterns 2024 review (S2666-3899(24)00189-2). Re-run key results on ≥1 alternative. <span class="shared">shared with #3</span></td>
+        <td class="chat"><b>item #2-3 · forward-model-generator</b><br><code>claude/forward-model-generator-code</code> (e78d1d)</td>
+        <td class="remind"><b>Cross-ref #7:</b> the forward-model leadfield generator also carries the biophysical realism, so the learned generator no longer needs to "resemble cortex" in any sense — #7 and #2 mutually reinforce.<br><br><b>Forward-model generator built.</b> <b>Best find: iVAE's success is the generator-specific result, not the failures</b> — iVAE recovers only under learned W (MCC ~0.71), collapses under random-W and the physics leadfield (~0.10). Inverts T2SC-Q3 / 11Xm-Q3: the learned generator is the most favorable case; negatives strengthen under physics. Linear methods generator-invariant (clean linear): PCA ~0.72–0.74, FastICA ~0.98–1.00 across all 3 mixings. 2nd generator = biophysical MNE 3-layer spherical forward model (K dipoles → 22 electrodes via physics leadfield, no training); only mixing changes, dynamics fixed. mRZt-Q1: no retraining per source-count. <b>Blocker: cross-gen runs used the OLD un-fixed TCL</b> (8-seg MLP, mcc vs raw z → TCL ≈ 0.06 clean), contradicts item #1 — stand on TCL-independent findings; do NOT cite cross-gen TCL clean numbers.</td>
       </tr>
       <tr>
         <td class="num">3</td><td><span class="pri high">High</span></td>
@@ -206,6 +212,8 @@
         <td class="raised">Meta · mRZt</td>
         <td class="myaction">Add runs with sources ≫ channels (true underdetermined case). If infeasible, explicitly scope the claim and explain the limitation.</td>
         <td class="planned"><span class="status done"><span class="dot"></span>Decided</span><br>Use the #2 generator review to find a generator that yields sources ≫ channels, enabling the untested M≫D regime. <span class="shared">shared with #2</span></td>
+        <td class="chat"><b>item #2-3 · forward-model-generator</b><br><code>claude/forward-model-generator-code</code> (e78d1d)<br><b>item#1 of @review_todo.html via</b></td>
+        <td class="remind"><b>Partial from the segment sweep</b> (item#1): m_vs_d ran M=2→22 at D=22, up to M=D, <b>not</b> M≫D. <b>Now resolved by the forward-model generator</b> (item #2-3): the biophysical leadfield has a free source count K at fixed D=22, so true M≫D is tested. FastICA MCC 0.91 (K=8) → 0.48 (K=22) → 0.17 (K=64) → 0.065 (K=128); PCA 0.59 → 0.29 → 0.11 → 0.05; iVAE near chance throughout. Near-perfect FastICA for K≤D vanishes once sources &gt; electrodes. (TCL not usable here — old code; stand on FastICA/PCA/iVAE.)</td>
       </tr>
       <tr>
         <td class="num">4</td><td><span class="pri high">High</span></td>
@@ -213,6 +221,8 @@
         <td class="raised">Meta · mRZt</td>
         <td class="myaction">Explain how the source-count sweep relates to the fixed generator; fix the text so the numbers are consistent.</td>
         <td class="planned empty"><span class="status pend"><span class="dot"></span>Pending</span></td>
+        <td class="chat empty">—</td>
+        <td class="remind"><b>Run landed (Path Y, teacher-forced).</b> Generator-driven sweep across 3 generators (BCI/HBN/TUEG): TCL recovers its own latents on clean (0.65 / 0.87 / 0.52), collapses as 1/f rises (→ 0.27 / 0.29 / 0.33 at 0 dB). §4 integrity fixed (TF sim makes "recurrent state = source" true); pattern generator-independent (kills #2 doubt); TF spectra match real EEG (backs #7). Still M&lt;D (dz=4) — does <b>not</b> touch #3's M≫D. Draft ready (~3,038 chars). Framing: 4 (generator's native dz) vs 22 (source-count axis) are two different constructions, not a typo. Camera-ready: separate the two setups in §4/§5, fix "approaches or exceeds" → "approaches".</td>
       </tr>
       <tr>
         <td class="num">5</td><td><span class="pri high">High</span></td>
@@ -220,6 +230,8 @@
         <td class="raised">Meta · mRZt · T2SC</td>
         <td class="myaction">Rewrite the caption to match the data (per method, per axis); drop the blanket statement.</td>
         <td class="planned empty"><span class="status pend"><span class="dot"></span>Pending</span><br><span style="color:var(--ink-faint)">Note: #1's TCL fix changes this data — caption must be revisited regardless.</span></td>
+        <td class="chat"><b>item#1 of @review_todo.html via</b></td>
+        <td class="remind"><b>Strongest reuse of the sweep.</b> mRZt's complaint ("TCL at chance throughout, never near-perfect") is now <b>reversed</b>: TCL genuinely drops near-perfect (0.98–0.99 clean) to near-chance (0.10 at 0 dB, ≥64 seg). The blanket "every method drops" becomes defensible <b>for TCL</b>; the sweep gives per-axis numbers to rewrite the caption truthfully. Same evidence as #1 — keep numbers consistent. <b>Draft ready (1,250 chars)</b> — per-method/per-axis caption: FastICA min 0.62 (tanh, never near-chance); iVAE 0.73 → 0.04 / 0.17 / 0.09; TCL 0.92 → 0.20 / 0.29; PCA 0.74 → 0.42. Position doesn't need every method to fail. See #5·10·11 panel.</td>
       </tr>
       <tr>
         <td class="num">6</td><td><span class="pri high">High</span></td>
@@ -227,6 +239,8 @@
         <td class="raised">Meta · T2SC · xW1o</td>
         <td class="myaction">Add a short survey/table in §2 citing specific scalp-only papers making identifiability claims without synthetic/interventional validation; state prevalence honestly.</td>
         <td class="planned"><span class="status done"><span class="dot"></span>Decided</span><br><b>Systematic review</b> to collect concrete claims. Leads: seminal TCL paper (Hyvärinen &amp; Morioka 2016, MEG example); Gramfort &amp; Hyvärinen nonlinear-ICA-on-EEG paper (verify exact ref). Find more.</td>
+        <td class="chat"><b>item #6 · Systematic review for action #6</b><br><code>claude/systematic-review-action-6-95eca0</code></td>
+        <td class="remind empty">—</td>
       </tr>
       <tr>
         <td class="num">7</td><td><span class="pri high">High</span></td>
@@ -234,6 +248,8 @@
         <td class="raised">Meta · T2SC</td>
         <td class="myaction">Pick one consistent framing; state exactly what the generator does and does not claim to capture; delete the conflicting lines.</td>
         <td class="planned"><span class="status done"><span class="dot"></span>Decided</span><br>Clarification only — reconcile the two into one consistent framing.</td>
+        <td class="chat"><b>item#7 components interpretibility</b></td>
+        <td class="remind"><b>Narrower than it looks — clarification only</b> (T2SC + Meta, shared, no experiment). Only L11 of <code>04_testbed.tex</code> offends ("dynamics resemble those of cortex" = reads as biophysical-fidelity claim); L13 + L22–23 already disclaim ("formal surrogate", "no biophysical fidelity"). Single framing: training on real EEG buys realism of <b>signal statistics</b> (spectra, nonstationarity, channel covariance) — what makes the stress test informative — but <b>nothing about source identity</b> (latents are ground truth by construction, not cortical sources). Camera-ready: replace L11 with "reproduces the statistical structure of real EEG … without any claim about biophysical source identity"; keep L13/L22–23. Also defuses Meta's "generator not biophysically validated" and reinforces #8. Cross-ref #2 (forward-model carries biophysical realism separately). ~1,650 chars. NO edits during rebuttal — future-tense only.</td>
       </tr>
       <tr>
         <td class="num">8</td><td><span class="pri high">High</span></td>
@@ -241,6 +257,8 @@
         <td class="raised">Meta · 11Xm</td>
         <td class="myaction">Add a paragraph separating the three; scope all strong claims to biological source recovery. Sharpen novelty: the falsifiability framing + benchmark + specific failure modes, not the generic limitation.</td>
         <td class="planned empty"><span class="status pend"><span class="dot"></span>Pending</span></td>
+        <td class="chat empty">—</td>
+        <td class="remind empty">—</td>
       </tr>
       <tr>
         <td class="num">9</td><td><span class="pri med">Med</span></td>
@@ -248,6 +266,8 @@
         <td class="raised">Meta</td>
         <td class="myaction">Clarify how coupling is implemented and show it produces real dynamical dependence; if it's linear, redo it as dependent dynamics.</td>
         <td class="planned"><span class="status done"><span class="dot"></span>Decided</span><br><b>First check if the critique holds</b> — is the coupling really just extra linear mixing, not dependent dynamics? If valid, address as a <b>clarification</b> of what the coupling does (framed as intended, not a fix).</td>
+        <td class="chat empty">—</td>
+        <td class="remind empty">—</td>
       </tr>
       <tr>
         <td class="num">10</td><td><span class="pri med">Med</span></td>
@@ -255,6 +275,8 @@
         <td class="raised">mRZt</td>
         <td class="myaction">Acknowledge standard pipelines; add a preprocessed condition or argue why cleaning doesn't remove the 1/f-type confounder driving the failure.</td>
         <td class="planned"><span class="status done"><span class="dot"></span>Decided</span><br>Note the original design used preprocessing (state what &amp; how) and why we switched to raw; report results were the <b>same on cleaned data</b>. Source from the rejected ICLR blogpost content.</td>
+        <td class="chat empty">—</td>
+        <td class="remind"><b>1/f confounder survives cleaning.</b> Sweep proves mRZt's "TCL captures 1/f" mechanism: the 1/f failure <b>deepens</b> as segments rise (finer segmentation → classifier tracks the 1/f nonstationarity harder) — 0 dB: 0.36 (8 seg) to 0.10 (128 seg). Confounder-aligned NS flat ~0.26 at every segment count. 1/f is broadband, so it survives RANSAC / ICA artifact removal. Reuse in both #10 and mRZt's response. <b>Draft ready (1,564 chars).</b> fooof (Donoghue 2020) treats 1/f as background to model, not discard. <b>PLACEHOLDER:</b> confirm whether the real-EEG analysis used a cleaning pipeline; else rely on the mechanistic argument. See #5·10·11 panel.</td>
       </tr>
       <tr>
         <td class="num">11</td><td><span class="pri med">Med</span></td>
@@ -262,6 +284,8 @@
         <td class="raised">T2SC</td>
         <td class="myaction">Rebut: above-chance ≠ identified biological sources; show FastICA still fails the identifiability bar (no ground-truth match / fails a specific axis).</td>
         <td class="planned empty"><span class="status pend"><span class="dot"></span>Pending</span></td>
+        <td class="chat"><b>item#1 of @review_todo.html via</b></td>
+        <td class="remind"><b>Answer ready — conceptual judo (1,667 chars), NOT "FastICA also fails".</b> FastICA stays &gt;0.6 on every axis (min 0.62 tanh) → do <b>not</b> argue numerical failure (contra the earlier todo plan, which our data don't support). Line: above-chance on synthetic ≠ validated biological ID on real EEG (no ground truth); FastICA makes no nonlinear-identifiability claim; "just use FastICA" <b>is</b> our position — retreat to the method that doesn't claim to identify sources. See #5·10·11 panel.</td>
       </tr>
       <tr>
         <td class="num">12</td><td><span class="pri med">Med</span></td>
@@ -269,6 +293,8 @@
         <td class="raised">T2SC</td>
         <td class="myaction">Add a one-line operational definition early (e.g., population-level dynamical sources) and use it consistently.</td>
         <td class="planned empty"><span class="status pend"><span class="dot"></span>Pending</span></td>
+        <td class="chat empty">—</td>
+        <td class="remind empty">—</td>
       </tr>
       <tr>
         <td class="num">13</td><td><span class="pri med">Med</span></td>
@@ -276,6 +302,8 @@
         <td class="raised">T2SC</td>
         <td class="myaction">Restructure §6, redo Figure 3, attach concrete numbers to every qualitative claim.</td>
         <td class="planned empty"><span class="status pend"><span class="dot"></span>Pending</span></td>
+        <td class="chat empty">—</td>
+        <td class="remind empty">—</td>
       </tr>
       <tr>
         <td class="num">14</td><td><span class="pri low">Low</span></td>
@@ -283,6 +311,8 @@
         <td class="raised">T2SC</td>
         <td class="myaction">Add one sentence to the caption/methods stating how chance level was computed.</td>
         <td class="planned empty"><span class="status pend"><span class="dot"></span>Pending</span></td>
+        <td class="chat empty">—</td>
+        <td class="remind empty">—</td>
       </tr>
       <tr>
         <td class="num">15</td><td><span class="pri low">Low</span></td>
@@ -290,126 +320,12 @@
         <td class="raised">T2SC</td>
         <td class="myaction">Revise the title to name the position explicitly.</td>
         <td class="planned empty"><span class="status pend"><span class="dot"></span>Pending</span></td>
+        <td class="chat empty">—</td>
+        <td class="remind empty">—</td>
       </tr>
     </tbody>
   </table></div></div>
 
-  <h2>#1 — TCL corrected results <span class="h-note">from the <em>TCL Fixed</em> chat</span></h2>
-  <p class="lede">Scored as MCC of TCL vs. |sources|; all other methods unchanged.</p>
-  <div class="tablecard resultgrid"><div class="scroll"><table>
-    <thead><tr><th>Stress axis</th><th>TCL old → new</th><th>Reading</th></tr></thead>
-    <tbody>
-      <tr><td class="axis">Clean linear / mild coupling</td><td class="delta"><span class="down">~0.07</span> → <span class="up">0.90–0.94</span></td><td class="reading">works when assumptions hold</td></tr>
-      <tr><td class="axis">Nonlinearity (tanh)</td><td class="delta"><span class="down">0.08</span> → <span class="up">0.83</span></td><td class="reading">robust to mild nonlinearity</td></tr>
-      <tr><td class="axis">1/f SNR (30→0 dB)</td><td class="delta"><span class="down">~0.05</span> → <span class="up">0.89</span> … <span class="down">0.20</span></td><td class="reading">breaks as noise rises</td></tr>
-      <tr><td class="axis">Nonstationarity (stationary / confounder-aligned)</td><td class="delta"><span class="down">~0.05</span> → 0.05 / 0.29</td><td class="reading">breaks when nonstationarity isn't source-driven</td></tr>
-      <tr><td class="axis">Sources vs. channels (M = 2 → 22)</td><td class="delta"><span class="down">~0.10</span> → <span class="up">0.94</span> … <span class="down">0.44</span></td><td class="reading">breaks as sources crowd the channels</td></tr>
-    </tbody>
-  </table></div></div>
-  <p class="takeaway"><b>Takeaway for the rebuttal:</b> the old "TCL ≈ 0 everywhere" (dismissible as a broken implementation) becomes "TCL recovers sources on clean data and breaks precisely along the EEG-realistic axes — low SNR with 1/f, confounder-aligned nonstationarity, high source-to-electrode ratio." A stronger, more credible version of the thesis: the method looks fine until stressed the way real scalp EEG stresses it — and on real EEG there is no ground truth to notice.</p>
-
-  <h2>Original reviews <span class="h-note">click to expand</span></h2>
-
-  <details class="review">
-    <summary><span class="rev-badge meta">META</span><span class="rev-id">Meta-review</span><span class="rev-verdict">structural argument + synthetic benchmark; five points to address</span><span class="rev-chev">▶</span></summary>
-    <div class="rev-body">
-      <h4>Summary</h4>
-      <p>Argues that latent-source identifiability claims based only on observational scalp EEG/MEG are not empirically falsifiable, and should require either synthetic evaluation with known ground truth or validation in intervention-capable settings. Supported by a structural argument about the scalp inverse problem and a synthetic benchmark comparing PCA, FastICA, TCL, iVAE across five stress axes.</p>
-      <h4>Strengths</h4>
-      <ul><li>Clear, relevant position on the gap between theoretical identifiability and empirical biological source recovery.</li><li>The five stress axes usefully connect method assumptions to EEG-specific failure conditions.</li><li>The distinction between useful representations and identified biological sources is important.</li></ul>
-      <h4>Weaknesses</h4>
-      <ul>
-        <li>Does not always separate mathematical identifiability, whether assumptions hold on real EEG, and whether recovered components correspond to biological sources. Strongest claims should be scoped to empirical biological source recovery.</li>
-        <li>Unclear how widespread the criticized practice is — few concrete examples of scalp-level studies making identifiability claims without validation.</li>
-        <li>Empirical clarifications needed: generator described with four latent dims while the source-count experiment varies up to 22; the central M≫D regime is not tested; the "every method drops from near-perfect to near-chance" claim is inconsistent with results.</li>
-        <li>TCL is load-bearing but never succeeds even under favorable conditions. Implementation differs from the original, uses only eight segments, and it's unclear whether the required post-processing ICA step was applied. Without a positive control, results may reflect implementation failure.</li>
-        <li>Conclusions may depend strongly on the generator and stress-test construction. The learned generator is not biophysically validated, and the source-coupling experiment may amount to additional linear mixing rather than dependent source dynamics.</li>
-      </ul>
-      <h4>Requested in rebuttal</h4>
-      <p>(1) Precisely define which identifiability claim applies and separate theorem validity from empirical/biological interpretation. (2) Concrete evidence the claims appear in current scalp EEG literature. (3) Clarify the TCL pipeline and show it succeeds under at least one assumption-satisfying condition. (4) Resolve the latent-dimension and M vs. D inconsistencies and correct claims not supported by Fig 2. (5) Explain robustness to the generator, preprocessing choices, and stress-axis construction.</p>
-    </div>
-  </details>
-
-  <details class="review">
-    <summary><span class="rev-badge reject">3</span><span class="rev-id">11Xm</span><span class="rev-verdict">Reject · conf 5 · thoroughness 3</span><span class="rev-chev">▶</span></summary>
-    <div class="rev-body">
-      <div class="meta-scores"><span class="metric">Support 3</span><span class="metric">Significance 2</span><span class="metric">Presentation 2</span><span class="metric">Context 2</span><span class="metric">Discussion 2</span><span class="metric">Agreement 3</span></div>
-      <h4>Summary</h4>
-      <p>The central claim appears to be a common-sense consequence of applying latent-variable models to brain data: model-estimated latent variables cannot be directly verified as true biological variables.</p>
-      <h4>Strengths</h4>
-      <p>Addresses an important topic at the intersection of causal representation learning and neuroscience. The discussion of validating latent-variable models on observational brain data is reasonable. Clearly written and well organized.</p>
-      <h4>Weaknesses</h4>
-      <p>The limitation is well known: model-estimated latents can't be directly verified as biological. Unclear what new insight the paper adds. Practical relevance of identifiability for neuroscience is unclear beyond theory. ICA's guarantees rely on strong assumptions unlikely to hold in the brain — the difficulty of verifying recovered latents reflects model-assumption limitations. The authors appear to elevate a well-known limitation into the central contribution.</p>
-      <h4>Questions</h4>
-      <ol><li>What is the new methodological insight beyond reiterating this general observation?</li><li>How should conclusions be interpreted beyond demonstrating violations of the model assumptions?</li><li>The benchmark is generated by another latent-variable model, so evaluation is model-dependent. How can robustness to the choice of generative model be demonstrated?</li></ol>
-    </div>
-  </details>
-
-  <details class="review">
-    <summary><span class="rev-badge accept">7</span><span class="rev-id">T2SC</span><span class="rev-verdict">Accept · conf 3 · thoroughness 3</span><span class="rev-chev">▶</span></summary>
-    <div class="rev-body">
-      <div class="meta-scores"><span class="metric">Support 3</span><span class="metric">Significance 3</span><span class="metric">Presentation 1</span><span class="metric">Context 2</span><span class="metric">Discussion 4</span><span class="metric">Agreement 4</span></div>
-      <h4>Summary</h4>
-      <p>A position paper arguing there is a fundamental flaw in how latent-source identification in scalp EEG is presented: usual identifiability claims are not falsifiable. Papers should include either a synthetic known-ground-truth benchmark or, ideally, an intervention paradigm. Argued via literature, novel reasoning, synthetic comparisons, and brief real-EEG results.</p>
-      <h4>Strengths</h4>
-      <ul><li>Clear arguments for why identifiability claims are unfalsifiable, theoretically and via the synthetic dataset.</li><li>Agrees scalp-EEG papers sometimes claim real latent sources without checking whether the method breaks under its assumptions.</li><li>Likes the five explicit axes and testing existing methods on them.</li></ul>
-      <h4>Weaknesses</h4>
-      <ul><li>Structure, writing, and figures (esp. Figure 3, §6) are messy; claims too broad without numerical backing.</li><li>Missing a definition of what latent sources can be identified — specific neurons, populations, abstract concepts?</li><li>Title should state the position explicitly.</li><li>Missing references where authors claim identifiability without the necessary evidence.</li><li>No positive result for TCL — suspects the generator or implementation. Include a condition where TCL works.</li><li>Inconsistent argument on generator fidelity: "resemble those of cortex" / "formal surrogate" (L162) vs. "We do not claim biophysical fidelity" (L176–177).</li></ul>
-      <h4>Questions</h4>
-      <ol><li>How was chance level in Figure 2 computed? Clarify in the paper.</li><li>FastICA stays strongly above chance on all axes — can't you just use it and get reasonable results?</li><li>Wouldn't synthetic benchmarks disproportionately reward generator-specific artifacts?</li></ol>
-    </div>
-  </details>
-
-  <details class="review">
-    <summary><span class="rev-badge weak">6</span><span class="rev-id">mRZt</span><span class="rev-verdict">Weak accept · conf 3 · thoroughness 4</span><span class="rev-chev">▶</span></summary>
-    <div class="rev-body">
-      <div class="meta-scores"><span class="metric">Support 3</span><span class="metric">Significance 3</span><span class="metric">Presentation 3</span><span class="metric">Context 3</span><span class="metric">Discussion 4</span><span class="metric">Agreement 4</span></div>
-      <h4>Summary</h4>
-      <p>Argues latent-source identifiability claims for nonlinear-ICA and CRL methods are unfalsifiable on observational scalp EEG/MEG: the inverse problem is underdetermined; evaluation lacks ground truth; nonstationarity-exploiting methods are biased toward nuisance confounders (1/f noise) rather than cognitive sources. Builds a synthetic testbed by training a shPLRNN on real EEG and using recurrent states as ground-truth latents. Four methods across five axes; TCL and iVAE collapse to near-chance. On real EEG, TCL fails to align with MNE ground-truth, likely latching onto 1/f noise.</p>
-      <h4>Strengths</h4>
-      <ol><li>Addresses a critical issue — unfalsifiability and method-dependence of identifiability claims — justified by three lines of reasoning.</li><li>The shPLRNN generator with ground-truth access is a novel benchmark filling a real gap.</li><li>Robust evaluation across axes; real-EEG results give strong evidence (TCL captures 1/f noise).</li><li>Proposes new evaluation standards.</li></ol>
-      <h4>Weaknesses</h4>
-      <ol><li>§4 states a fixed latent dimension (L168); §5 sweeps up to 22 (L226).</li><li>Core issue is the underdetermined case where sources far exceed channels, but experiments strictly test the opposite; the critical regime is never evaluated.</li><li>Fig 2 caption ("every method drops from near-perfect to near-chance") is contradicted: FastICA stays robust and never drops; TCL is at chance throughout and never near-perfect.</li><li>Ignores standard EEG cleaning (RANSAC, ICA-based artifact removal) routinely applied before analysis.</li></ol>
-      <h4>Questions</h4>
-      <ol><li>Was the generator retrained for each "sources vs. channels" variation?</li><li>Would the untested regime governing real scalp EEG matter for evaluating one of the named methods?</li><li>If standard preprocessing were applied, would the §3 step-2 claims still hold?</li></ol>
-    </div>
-  </details>
-
-  <details class="review">
-    <summary><span class="rev-badge reject">4</span><span class="rev-id">xW1o</span><span class="rev-verdict">Borderline reject · conf 4 · thoroughness 4</span><span class="rev-chev">▶</span></summary>
-    <div class="rev-body">
-      <div class="meta-scores"><span class="metric">Support 2</span><span class="metric">Significance 2</span><span class="metric">Presentation 3</span><span class="metric">Context 3</span><span class="metric">Discussion 3</span><span class="metric">Agreement 4</span></div>
-      <h4>Summary</h4>
-      <p>Argues EEG latent-source estimation methods need validation via synthetic data and interventional evidence, and otherwise remain unfalsifiable. Methods evaluated on synthetic data testing robustness to the breakdown of five hypotheses, plus a real-EEG case study.</p>
-      <h4>Strengths</h4>
-      <p>Clear problem, reasonable position, clear reasoning followed by clear synthetic evidence (except TCL). The argument that TCL's classifier may be more sensitive to large-scale drifts than cognition-relevant sources is reasonable and well-formulated. The irreducibly underdetermined inverse problem and absence of method-independent ground truth are structural properties of the modality.</p>
-      <h4>Weaknesses</h4>
-      <p>TCL is load-bearing but the implementation appears too weak to be representative. Vs. Hyvärinen &amp; Morioka (2016): they Morlet-filtered around the alpha band and found performance rises with more segments. Here: a per-timestep MLP (3 layers, width 64) + multinomial logistic regression over <b>8 segments</b>, no preprocessing mentioned. The original used up to 512 segments; 8 is the lowest, worst-performing setting. Dropout/normalization layers appear omitted. These mismatches could plausibly explain the low TCL performance across the board, including under favorable conditions — so the implementation doesn't fairly represent TCL, for both synthetic and real-EEG experiments.</p>
-      <h4>Questions</h4>
-      <p>Would benefit from clearer scoping — how widespread is the problem in practice? Some relevant literature already includes synthetic benchmarks. §2 could detail prevalence, or at least give examples of scalp-level-only publications making identifiability claims; is this specifically a TCL issue? Would it be possible to rerun TCL with band-filtered spectral features and a segment count in the original's demonstrated range (≥64, ideally swept)? A stronger TCL implementation could significantly strengthen the argument.</p>
-    </div>
-  </details>
-
-  <section class="rules">
-    <h2>Writing the rebuttal box — rules &amp; approach</h2>
-    <p class="lede">NeurIPS 2026 author response. Post via the per-review <b>Rebuttal</b> buttons in OpenReview. Use the meta-review as your guide — it names what would most change the AC's view.</p>
-    <div class="rules-grid">
-      <div class="rule"><span class="k">Length</span><span class="v"><b>10,000 characters</b> per review. Plain text with OpenReview markdown; <b>no file uploads</b>.</span></div>
-      <div class="rule"><span class="k">Scope</span><span class="v">Clarify reviewers'/ACs' questions. <b>No paper or supplementary revisions</b> — the original submission stays the basis for the decision. New results are allowed inline.</span></div>
-      <div class="rule warn"><span class="k">No links</span><span class="v">None anywhere. <b>Only exception:</b> if reviewers asked for code, send an <b>anonymized</b> link to the AC in an Official Comment (all linked files anonymized).</span></div>
-      <div class="rule warn"><span class="k">Anonymity</span><span class="v">Must not reveal author identity or otherwise break double-blind.</span></div>
-      <div class="rule warn"><span class="k">Audience</span><span class="v">Check that the <b>readers of each message are the ones you intend</b> before posting.</span></div>
-      <div class="rule"><span class="k">Cadence</span><span class="v">Engage early and often — reviewers may follow up in Phase 2. Don't wait for the last day. Keep it factual (Code of Conduct).</span></div>
-      <div class="rule"><span class="k">Style</span><span class="v">Draft and edit every response with <b><code>/mahta-writing</code></b> — apply Mahta's academic writing style throughout.</span></div>
-      <div class="rule wide"><span class="k">Tone &amp; framing</span><span class="v">Be <b>respectful and attentive</b> to each reviewer's response and their intention. Where they're right to criticize and we were sloppy — something needing substantial change — frame the fix so it <b>doesn't damage our image</b>: present it as an update for <b>clarity / coherence</b>, with a brief, solid reason for why the issue arose in the first place. Concede the point gracefully, then show the improvement.</span></div>
-    </div>
-    <div class="timeline">
-      <div class="phase now"><div class="p-when">Jul 22 – 27</div><div class="p-what"><b>Phase 1 · Author response only.</b> Draft your reply; reviewers/ACs don't see it until phase end.</div></div>
-      <div class="phase"><div class="p-when">Jul 27 – Aug 3</div><div class="p-what"><b>Phase 2 · Discussion.</b> Reviewers/ACs see your response and may ask follow-ups; you can reply.</div></div>
-      <div class="phase"><div class="p-when">Aug 3 – 10</div><div class="p-what"><b>Phase 3 · Reviewer/AC only.</b> Authors can no longer see the discussion.</div></div>
-    </div>
-  </section>
-
-  <footer>Consolidated from OpenReview submission 951 · meta-review + reviewers 11Xm, T2SC, mRZt, xW1o. Mirrors <code>REVIEW_TODO.md</code>.</footer>
+  <p class="lede" style="margin-top:1rem">Full working notes, corrected results, verbatim reviews and response rules are tracked in the live artifact. This repo copy mirrors the action table; see the <b>Phase 2 open-items</b> page for what is still unaddressed after the Phase-1 rebuttals.</p>
 
 </div></div>
